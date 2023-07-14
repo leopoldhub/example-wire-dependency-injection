@@ -1,22 +1,22 @@
 import AbstractController, {
   CONTROLLER_BEAN_TYPE,
 } from './AbstractController.js';
-import injector from 'wire-dependency-injection';
+import injector, { Bean, ClassType } from 'wire-dependency-injection';
 import { Request, Response } from 'express';
 import AbstractClockService from '../service/AbstractClockService.js';
 
 class PrettyDatesController extends AbstractController {
   private frenchClockService?: AbstractClockService = injector.autoWire(
-    'frenchClockService',
+    'FrenchClockService',
     (b) => (this.frenchClockService = b)
   );
   private utcClockService?: AbstractClockService = injector.autoWire(
-    'utcClockService',
+    'UtcClockService',
     (b) => (this.utcClockService = b)
   );
 
-  public constructor() {
-    super('/prettyDates');
+  public constructor(bean: Bean) {
+    super('/' + bean.getId());
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -35,7 +35,7 @@ class PrettyDatesController extends AbstractController {
 
 // The registering of our bean will be triggered at the import of this file
 injector.registerBean(
-  'prettyDatesController',
-  PrettyDatesController,
+  PrettyDatesController as ClassType,
+  PrettyDatesController.name,
   CONTROLLER_BEAN_TYPE
 );

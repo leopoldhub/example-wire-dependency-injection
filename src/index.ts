@@ -1,20 +1,15 @@
 // We import and register our beans
 import './beans.js';
 import injector from 'wire-dependency-injection';
-import AbstractClockService from './service/AbstractClockService.js';
 import express from 'express';
 import AbstractController, {
   CONTROLLER_BEAN_TYPE,
 } from './controller/AbstractController.js';
+import FrenchClockService from './service/FrenchClockService.js';
+import UtcClockService from './service/UtcClockService.js';
 
-console.log(
-  'French date is',
-  (injector.wire('frenchClockService') as AbstractClockService).getDate()
-);
-console.log(
-  'UTC date is',
-  (injector.wire('utcClockService') as AbstractClockService).getDate()
-);
+console.log('French date is', injector.wire(FrenchClockService).getDate());
+console.log('UTC date is', injector.wire(UtcClockService).getDate());
 
 const app = express();
 const port = 3000;
