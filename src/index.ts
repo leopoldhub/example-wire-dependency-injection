@@ -1,5 +1,6 @@
+// We import and register our beans
 import './beans.js';
-import dependencyInjector from 'wire-dependency-injection';
+import injector from 'wire-dependency-injection';
 import AbstractClockService from './service/AbstractClockService.js';
 import express from 'express';
 import AbstractController, {
@@ -8,19 +9,17 @@ import AbstractController, {
 
 console.log(
   'French date is',
-  (
-    dependencyInjector.wire('frenchClockService') as AbstractClockService
-  ).getDate()
+  (injector.wire('frenchClockService') as AbstractClockService).getDate()
 );
 console.log(
   'UTC date is',
-  (dependencyInjector.wire('utcClockService') as AbstractClockService).getDate()
+  (injector.wire('utcClockService') as AbstractClockService).getDate()
 );
 
 const app = express();
 const port = 3000;
 
-dependencyInjector.getContainers().forEach((container) =>
+injector.getContainers().forEach((container) =>
   container.getBeans().forEach((bean) => {
     if (bean.getType() === CONTROLLER_BEAN_TYPE) {
       const controller = bean.getInstance() as AbstractController;

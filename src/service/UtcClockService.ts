@@ -1,5 +1,5 @@
 import AbstractClockService from './AbstractClockService.js';
-import dependencyInjector from 'wire-dependency-injection';
+import injector from 'wire-dependency-injection';
 
 class UtcClockService extends AbstractClockService {
   public getDate() {
@@ -7,4 +7,5 @@ class UtcClockService extends AbstractClockService {
   }
 }
 
-dependencyInjector.registerBean('utcClockService', UtcClockService);
+// The registering of our bean will be triggered at the import of this file
+injector.registerBean('utcClockService', UtcClockService);
