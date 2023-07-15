@@ -1,7 +1,7 @@
 import AbstractController, {
   CONTROLLER_BEAN_TYPE,
 } from './AbstractController.js';
-import injector, { Bean, ClassType } from 'wire-dependency-injection';
+import injector, { Bean } from 'wire-dependency-injection';
 import { Request, Response } from 'express';
 import AbstractClockService from '../service/AbstractClockService.js';
 
@@ -34,8 +34,4 @@ class PrettyDatesController extends AbstractController {
 }
 
 // The registering of our bean will be triggered at the import of this file
-injector.registerBean(
-  PrettyDatesController as ClassType,
-  PrettyDatesController.name,
-  CONTROLLER_BEAN_TYPE
-);
+injector.registerBean(PrettyDatesController, { type: CONTROLLER_BEAN_TYPE });

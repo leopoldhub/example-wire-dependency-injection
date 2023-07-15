@@ -1,7 +1,7 @@
 import AbstractController, {
   CONTROLLER_BEAN_TYPE,
 } from './AbstractController.js';
-import injector, { ClassType, Bean } from 'wire-dependency-injection';
+import injector, { Bean } from 'wire-dependency-injection';
 import { Request, Response } from 'express';
 import AbstractClockService from '../service/AbstractClockService.js';
 import FrenchClockService from '../service/FrenchClockService.js';
@@ -31,8 +31,4 @@ class JsonDatesController extends AbstractController {
 }
 
 // The registering of our bean will be triggered at the import of this file
-injector.registerBean(
-  JsonDatesController as ClassType,
-  JsonDatesController.name,
-  CONTROLLER_BEAN_TYPE
-);
+injector.registerBean(JsonDatesController, { type: CONTROLLER_BEAN_TYPE });
