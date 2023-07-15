@@ -14,8 +14,10 @@ console.log('UTC date is', injector.wire(UtcClockService).getDate());
 const app = express();
 const port = 3000;
 
-injector.getContainers().forEach((container) =>
-  container.getBeans().forEach((bean) => {
+injector
+  .getContainer()
+  ?.getBeansByType(CONTROLLER_BEAN_TYPE)
+  .forEach((bean) => {
     if (bean.getType() === CONTROLLER_BEAN_TYPE) {
       const controller = bean.getInstance() as AbstractController;
       app.get(controller.getPath(), (req, res) => controller.execute(req, res));
@@ -26,8 +28,7 @@ injector.getContainers().forEach((container) =>
         controller.getPath()
       );
     }
-  })
-);
+  });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

@@ -8,11 +8,11 @@ import FrenchClockService from '../service/FrenchClockService.js';
 import UtcClockService from '../service/UtcClockService.js';
 
 class JsonDatesController extends AbstractController {
-  private frenchClockService?: AbstractClockService = injector.autoWire(
+  private frenchClockService: FrenchClockService = injector.autoWire(
     FrenchClockService,
     (b) => (this.frenchClockService = b)
   );
-  private utcClockService?: AbstractClockService = injector.autoWire(
+  private utcClockService: AbstractClockService = injector.autoWire(
     UtcClockService,
     (b) => (this.utcClockService = b)
   );
@@ -24,7 +24,7 @@ class JsonDatesController extends AbstractController {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public execute(_: Request, res: Response) {
     res.send({
-      frenchTime: this.frenchClockService?.getDate(),
+      frenchTime: this.frenchClockService.getDate(),
       utcTime: this.utcClockService?.getDate(),
     });
   }

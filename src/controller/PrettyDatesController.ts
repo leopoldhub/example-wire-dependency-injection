@@ -6,11 +6,11 @@ import { Request, Response } from 'express';
 import AbstractClockService from '../service/AbstractClockService.js';
 
 class PrettyDatesController extends AbstractController {
-  private frenchClockService?: AbstractClockService = injector.autoWire(
+  private frenchClockService: AbstractClockService = injector.autoWire(
     'FrenchClockService',
     (b) => (this.frenchClockService = b)
   );
-  private utcClockService?: AbstractClockService = injector.autoWire(
+  private utcClockService: AbstractClockService = injector.autoWire(
     'UtcClockService',
     (b) => (this.utcClockService = b)
   );
