@@ -1,7 +1,7 @@
-import { BeanType } from 'wire-dependency-injection';
+import { BeanCategory } from 'wire-dependency-injection';
 import { Request, Response } from 'express';
 
-export const CONTROLLER_BEAN_TYPE: BeanType = 'controller';
+export const CONTROLLER: BeanCategory = 'CONTROLLER';
 
 export default abstract class AbstractController {
   protected constructor(protected readonly path: string) {}

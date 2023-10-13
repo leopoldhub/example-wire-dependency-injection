@@ -1,8 +1,12 @@
+<div align="center">
+
 # Example for Wire Dependency Injection
 
 [![Twitter Follow][twitter-image-url]][twitter-url]
 
-This project is an example for the [Wire Dependency Injection](https://github.com/leopoldhub/wire-dependency-injection) library
+This project is a usage example of the [Wire Dependency Injection](https://github.com/leopoldhub/wire-dependency-injection) library
+
+</div>
 
 ## Run
 

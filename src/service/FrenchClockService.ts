@@ -1,11 +1,15 @@
-import AbstractClockService from './AbstractClockService.js';
-import injector from 'wire-dependency-injection';
+import AbstractClockService, { SERVICE } from './AbstractClockService.js';
+import dependencyManager, { LAZY } from 'wire-dependency-injection';
 
-export default class FrenchClockService extends AbstractClockService {
+class FrenchClockService extends AbstractClockService {
   public getDate() {
     return new Date().toLocaleString('en-US', { timeZone: 'Europe/Paris' });
   }
 }
 
 // The registering of our bean will be triggered at the import of this file
-injector.registerBean(FrenchClockService);
+// The lazy behaviour makes it not declare until we request it
+dependencyManager.instance('service.french-clock', FrenchClockService, {
+  behaviour: LAZY,
+  category: SERVICE,
+});
