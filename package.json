@@ -55,6 +55,6 @@
   },
   "dependencies": {
     "express": "^4.18.2",
-    "wire-dependency-injection": "file:../wire-dependency-injection"
+    "wire-dependency-injection": "^2.0.4"
   }
 }
