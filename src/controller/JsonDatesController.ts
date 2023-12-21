@@ -3,7 +3,17 @@ import dependencyManager, { LAZY } from 'wire-dependency-injection';
 import { Request, Response } from 'express';
 import AbstractClockService from '../service/AbstractClockService.js';
 
-class JsonDatesController extends AbstractController {
+export class JsonDatesController extends AbstractController {
+  static {
+    // The registering of our bean will be triggered at the import of this file
+    // The lazy behaviour makes it not declare until we request it
+    dependencyManager.instance('controller.json-dates', JsonDatesController, {
+      behaviour: LAZY,
+      category: CONTROLLER,
+      wiring: ['service.french-clock', 'service.utc-clock'],
+    });
+  }
+
   // Receiving the wired controllers on instance one by one
   public constructor(
     private readonly frenchClockService: AbstractClockService,
@@ -19,11 +29,3 @@ class JsonDatesController extends AbstractController {
     });
   }
 }
-
-// The registering of our bean will be triggered at the import of this file
-// The lazy behaviour makes it not declare until we request it
-dependencyManager.instance('controller.json-dates', JsonDatesController, {
-  behaviour: LAZY,
-  category: CONTROLLER,
-  wiring: ['service.french-clock', 'service.utc-clock'],
-});
